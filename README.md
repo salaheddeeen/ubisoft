@@ -25,3 +25,11 @@ To run the application you need to follow below steps:
 7. move to root directory and run below cmd to start all services 
 
 	docker-compose up -d
+
+8. To test webservice you can use postman or curl:
+
+	curl http://localhost:8080/TestDevWebService/services/user/cecilia
+	
+9. To test webapp you can access it from below link:
+	
+	http://localhost:8081
