@@ -1,6 +1,7 @@
 package com.ubisoft.webapp.service.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -28,8 +29,12 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public List<Item> getUserItems(String userName){
-        User user =restTemplate.getForObject(USER_ITEMS_WS+userName+"/", User.class);
-        return user.getItems();
+		UserDetails loggedInUser = getCurrentLoggedInUser();
+		if(hasAdminRole(loggedInUser)||loggedInUser.getUsername().equals(userName)) {
+	        User user =restTemplate.getForObject(USER_ITEMS_WS+userName+"/", User.class);
+	        return user!=null ? user.getItems(): Collections.emptyList();
+		}
+        return Collections.emptyList();
 	}
 
 
