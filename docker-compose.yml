@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+
+  webapp-db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: testwebapp
+
+    volumes:
+      - /data/webapp-db/mysql
+         
+  webservice-db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: testdevws
+
+    volumes:
+      - /data/webservice-db/mysql
+      
+  webapp:
+    image: webapp:v1
+    ports: 
+      - 8081:8081
+    depends_on:
+      - webapp-db
+      - webservice
+    restart: always
+
+
+  webservice:
+    image: webservice:v1
+    ports: 
+      - 8080:8080
+    depends_on:
+      - webservice-db
+    restart: always

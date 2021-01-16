@@ -1,0 +1,25 @@
+<div  th:switch="${items}">
+	    <h2 th:case="null">There is not items purchase yet!</h2>
+		<div th:case="*">
+            <h2>Items</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Game</th>
+                        <th>Quantity</th>
+                        <th>Expiration Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr th:each="item : ${items}}">
+                    <td th:text="${item.name}"></td>
+                    <td th:text="${item.game}"></td>
+                    <td th:text="${item.quantity}"></td>
+                     <td th:text="${item.expirationDate}"></td>
+                    
+                </tr>
+            </tbody>
+        </table>
+    </div>      
+</div>

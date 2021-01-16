@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+		<div>
+            <h2>Users</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>View Items</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user: ${users}">
+                    <td th:text="${user.username}"></td>
+                    <td>
+                    <a th:href="@{'/users/'+${user.username}+'/items'}">view</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>      
+   
+  </body>
+</html>
