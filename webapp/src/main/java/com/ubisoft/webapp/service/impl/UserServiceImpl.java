@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
 	private RestTemplate restTemplate;
 	
 	@Autowired 
-	private UserRepository UserRepository;
+	private UserRepository userRepository;
 	
 	@Override
 	public List<Item> getUserItems(String userName){
@@ -38,10 +38,10 @@ public class UserServiceImpl implements UserService {
 	public List<UserEntity> getUsers(){
 		UserDetails loggedInUser = getCurrentLoggedInUser();
 		if(hasAdminRole(loggedInUser)) {
-			return UserRepository.findAll();
+			return userRepository.findAll();
 		}else {
 			List<UserEntity> users =  new ArrayList<UserEntity>();
-			users.add(UserRepository.findByUsername(loggedInUser.getUsername()));
+			users.add(userRepository.findByUsername(loggedInUser.getUsername()));
 			return users;
 		}
 	
